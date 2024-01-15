@@ -1,0 +1,49 @@
+<div class="container pt-5">
+  <div class="search-container">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Busca por documento o nombre"
+        [(ngModel)]="search"
+        (keyup.enter)="GetEmployeeByDocumentOrName()"
+      />
+      <span class="fa-solid fa-magnifying-glass input-group-text" (click)="GetEmployeeByDocumentOrName()"></span>
+    </div>
+  </div>
+  <table class="table">
+    <thead class="table-custom">
+      <tr>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Fecha Contratación</th>
+        <th>Tipo Documento</th>
+        <th>Número Documento</th>
+        <th>País</th>
+        <th>Área</th>
+        <th>Subárea</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (employee of employeeList | slice: (page-1) * pageSize : page * pageSize; track $index) {
+      <tr>
+        <td>{{ employee.names }}</td>
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.createdDate | date : "dd-MM-yyyy HH:mm" }}</td>
+        <td>{{ employee.documentType }}</td>
+        <td>{{ employee.documentNumber }}</td>
+        <td>{{ employee.country }}</td>
+        <td>{{ employee.area }}</td>
+        <td>{{ employee.subArea }}</td>
+        <td>
+          <a class="btn btn-sm btn-primary btn-pink" type="button" [routerLink]="'/update-employee/'+employee.documentNumber">Editar</a>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  <ngb-pagination [(page)]="page"
+                [pageSize]="pageSize"
+                [collectionSize]="employeeList.length" />
+</div>

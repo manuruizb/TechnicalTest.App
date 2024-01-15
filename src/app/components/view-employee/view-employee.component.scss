@@ -1,0 +1,16 @@
+.table-custom{
+    th{
+        background-color: #d271e7 !important;
+        color: #fff;
+    }
+}
+.search-container{
+    .input-group{
+        width: 300px;
+        margin-left: auto;
+        .input-group-text{
+            padding-top: 10px;
+            cursor:pointer;
+        }
+    }
+}

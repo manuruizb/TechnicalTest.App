@@ -1,0 +1,110 @@
+<div class="container pt-5">
+    <form [formGroup]="employeeForm" (ngSubmit)="CreateEmployee()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                    <input type="text" class="form-control" 
+                    [ngClass]="{
+                        'is-invalid':employeeForm.get('names')?.errors
+                    }" 
+                    formControlName="names">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" formControlName="lastName"
+                    [ngClass]="{
+                        'is-invalid':employeeForm.get('lastName')?.errors
+                    }" >
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Tipo documento</label>
+                    <select class="form-control" formControlName="documentTypeId"
+                    [ngClass]="{
+                        'is-invalid':employeeForm.get('documentTypeId')?.errors
+                    }">
+                        <option value="">Seleccione</option>
+                        @for (documentType of documentTypeList; track $index) {
+                            <option [value]="documentType.documentTypeId">{{documentType.documentType}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Número documento</label>
+                    <input type="text" class="form-control" formControlName="documentNumber"
+                    [ngClass]="{
+                        'is-invalid':employeeForm.get('documentNumber')?.errors
+                    }">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">País</label>
+                    <select class="form-control" formControlName="countryId" (change)="GetAreasByCountry($event)"
+                    [ngClass]="{
+                        'is-invalid':employeeForm.get('countryId')?.errors
+                    }">
+                        <option value="">Seleccione</option>
+                        @for (country of countryList; track $index) {
+                            <option [value]="country.countryId">{{country.country}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Área</label>
+                    <select class="form-control" formControlName="areaId" (change)="GetSubAreasByArea($event)"
+                    [ngClass]="{
+                        'is-invalid':employeeForm.get('areaId')?.errors
+                    }">
+                        <option value="">Seleccione</option>
+                        @for (area of areaList; track $index) {
+                            <option [value]="area.areaId">{{area.area}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Subárea</label>
+                    <select class="form-control" formControlName="subAreaId"
+                    [ngClass]="{
+                        'is-invalid':employeeForm.get('subAreaId')?.errors
+                    }">
+                        <option value="">Seleccione</option>
+                        @for (subArea of subAreaList; track $index) {
+                            <option [value]="subArea.subAreaId">{{subArea.subArea}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Fecha de contratación</label>
+                    <input type="date" class="form-control" formControlName="createdDateString"
+                    [ngClass]="{
+                        'is-invalid':employeeForm.get('createdDateString')?.errors
+                    }" >
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary btn-save" type="submit">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>
